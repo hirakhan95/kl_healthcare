@@ -1,5 +1,6 @@
-from _datetime import datetime
+from _datetime import datetime, date
 import inflect
+
 p = inflect.engine()
 
 
@@ -11,11 +12,17 @@ def datetime_check(index: int, date_str: str, time_str: str):
     :param time_str: time str
     :return: string that the date has been reached
     """
-    checked_date = datetime.strptime(date_str, '%d.%m.%Y').date()
-    checked_time = datetime.strptime(time_str, '%H:%M').time()
-    s = p.number_to_words(p.ordinal(index+1))
+    index_ordinal = p.number_to_words(p.ordinal(index + 1))
+    datetime_str = date_str + ':' + time_str
+    datetime_obj = datetime.strptime(datetime_str, '%d.%m.%Y:%H:%M')
 
-    return 'The {} date has been reached! ( {:%d.%m.%Y} - {:%H:%M})'.format(s, checked_date, checked_time)
+    # Check if the datetime has been reached or will reach
+    if datetime_obj < datetime.now():
+        return 'The {} date has been reached! ( {:%d.%m.%Y} - {:%H:%M} )'.format(index_ordinal, datetime_obj.date(),
+                                                                                datetime_obj.time())
+    else:
+        return 'The {} date will reach! ( {:%d.%m.%Y} - {:%H:%M} )'.format(index_ordinal, datetime_obj.date(),
+                                                                          datetime_obj.time())
 
 
 if __name__ == '__main__':
@@ -27,5 +34,6 @@ if __name__ == '__main__':
         res.append(datetime_check(i, date_input, time_input))
 
     print("Thank you very much. I will notify them!\n...")
+
     for r in res:
         print(r)
