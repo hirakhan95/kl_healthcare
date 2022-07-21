@@ -11,7 +11,7 @@ NOTIFY_LOGS = DIR_LOCATION+'/ntfy.logs'
 
 
 def cron_function_every_minute(command):
-    cron = CronTab(user='panda')
+    cron = CronTab(user=os.getlogin())
     exist = False
     for line in cron.lines:
         if line and command == line.command:

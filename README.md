@@ -12,6 +12,6 @@ crontab.
 
 ### Execution
 To run the program execute in terminal:
-> python datetime_check.py
+> python notifier.py
 
 * You will need full disc permission on mac for cron.
