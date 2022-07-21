@@ -6,7 +6,12 @@ NOTIFY_PATH = DIR_LOCATION+'/notify.schedule'
 NOTIFICATION_TITLE = 'KL Health Care Notification'
 
 
-def os_notify(title, text):
+def os_notify(title: str, text: str):
+    """
+    OS Notification function
+    :param title: title of the notification
+    :param text: text for the notification
+    """
     os.system("""
               osascript -e 'display notification "{}" with title "{}"'
               """.format(text, title))
@@ -27,9 +32,9 @@ with open(NOTIFY_PATH) as schedule_file:
         else:
             save_back_again.append(f'{ordinal}#{dt}')
 
-    if os.path.exists(NOTIFY_PATH):
-        os.remove(NOTIFY_PATH)
+if os.path.exists(NOTIFY_PATH):
+    os.remove(NOTIFY_PATH)
 
-    with open(NOTIFY_PATH, 'a+') as file:
-        for text in save_back_again:
-            file.write(f'{text}\n')
+with open(NOTIFY_PATH, 'a+') as file:
+    for text in save_back_again:
+        file.write(f'{text}\n')

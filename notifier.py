@@ -10,7 +10,11 @@ NOTIFY_PATH = DIR_LOCATION+'/notifications.py'
 NOTIFY_LOGS = DIR_LOCATION+'/ntfy.logs'
 
 
-def cron_function_every_minute(command):
+def cron_function_every_minute(command: str):
+    """
+    function to create a cron job uisng crontab
+    :param command: command to run at every minute
+    """
     cron = CronTab(user=os.getlogin())
     exist = False
     for line in cron.lines:
@@ -29,7 +33,6 @@ def datetime_check(index: int, date_str: str, time_str: str):
     :param index: number to show
     :param date_str: date string
     :param time_str: time str
-    :return: string that the date has been reached
     """
     index_ordinal = p.number_to_words(p.ordinal(index + 1))
     datetime_str = date_str + ':' + time_str
@@ -46,6 +49,6 @@ if __name__ == '__main__':
         time_input = input('Please enter a time: ')
         datetime_check(i, date_input, time_input)
 
-    cron_function_every_minute(f'python3 {NOTIFY_PATH} > {NOTIFY_LOGS}')
+    cron_function_every_minute(f'python3 {NOTIFY_PATH} >> {NOTIFY_LOGS}')
 
     print("Thank you very much. I will notify them!\n...")
