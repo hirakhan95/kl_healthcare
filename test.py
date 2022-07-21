@@ -1,4 +1,4 @@
-from datetime_check import datetime_check
+from notifier import datetime_check
 
 
 def test_module():

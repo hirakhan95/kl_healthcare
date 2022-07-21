@@ -1,13 +1,17 @@
 # Coding Challenge from KL Healthcare GmbH
 
-- Created two modules i.e. datetime_check and test.
-- Test file contains test cases 
+- Created two modules i.e. notifications and notifier
 - 3 parameters are given to the function 'datetime_check'
+
+Notifier register the notification notify.schedule and 
+notifications checks if the date has passed the current 
+date time.
+
+It's the responsibility of notifier to register job in 
+crontab.
 
 ### Execution
 To run the program execute in terminal:
 > python datetime_check.py
 
-### Test
-To run the test cases execute in terminal:
-> python test.py
+* You will need full disc permission on mac for cron.
